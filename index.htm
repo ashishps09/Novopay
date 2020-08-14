@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Please Enter Entries to your table.</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+tr:hover {
+    -webkit-box-shadow: 0px 2px 4px #e06547;
+    -moz-box-shadow: 0px 2px 4px #e06547;
+    box-shadow: 0px 2px 4px #e06547;
+    background-color: #d4d5d6;
+}
+</style>
+</head>
+<body>
+    
+<div class="container">
+  <h1>Please Enter Entries to your table</h1>
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+  <form>
+        
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" name="name" class="form-control" value="Aashish" required="">
+    </div>
+    
+    <div class="form-group">
+      <label>Age:</label>
+      <input type="text" name="age" class="form-control" value="22" required="">
+    </div>
+   
+    <div class="form-group">
+      <label>DOB:</label>
+      <input type="text" name="dob" class="form-control" value="1998/07/28" required="">
+    </div>
+    
+    <div class="form-group">
+      <label>Interests:</label>
+      <input type="text" name="interests" class="form-control" value="Reading" required="">
+    </div>
+
+    <div class="form-group">
+      <label>Place:</label>
+      <input type="text" name="place" class="form-control" value="Delhi" required="">
+    </div>
+    <button type="submit" class="btn btn-success save-btn">Add User</button>
+    
+  </form>
+  <br/>
+  <table class="table table-bordered data-table" id="myTable">
+    <thead>
+      <th>Name</th>
+      <th>Age</th>
+      <th>DOB</th>
+      <th>Interests</th>
+      <th>Place</th>
+      <th width="200px">Action</th>
+    </thead>
+    <tbody>
+    
+    </tbody>
+  </table>
+   
+</div>
+   
+<script type="text/javascript">
+   
+    $("form").submit(function(e){
+        e.preventDefault();
+        var name = $("input[name='name']").val();
+        var age = $("input[name='age']").val();
+	var dob = $("input[name='dob']").val();
+	var interests = $("input[name='interests']").val();
+	var place = $("input[name='place']").val();
+          
+        $(".data-table tbody").append("<tr data-name='"+name+"' data-age='"+age+"' data-dob='"+dob+"' data-interests='"+interests+"' data-place='"+place+"'><td>"+name+"</td><td>"+age+"</td><td>"+dob+"</td><td>"+interests+"</td><td>"+place+"</td><td><button class='btn btn-info btn-xs btn-edit'>Edit</button>&nbsp<button class='btn btn-danger btn-xs btn-delete'>Delete</button></td></tr>");
+    
+        $("input[name='name']").val('');
+        $("input[name='age']").val('');
+	$("input[name='dob']").val('');
+	$("input[name='interests']").val('');
+	$("input[name='place']").val('');
+    });
+   
+    $("body").on("click", ".btn-delete", function(){
+        $(this).parents("tr").remove();
+    });
+    
+    $("body").on("click", ".btn-edit", function(){
+        var name = $(this).parents("tr").attr('data-name');
+        var age = $(this).parents("tr").attr('data-age');
+	var dob = $(this).parents("tr").attr('data-dob');
+	var interests = $(this).parents("tr").attr('data-interests');
+	var place = $(this).parents("tr").attr('data-place');
+    
+        $(this).parents("tr").find("td:eq(0)").html('<input name="edit_name" value="'+name+'">');
+        $(this).parents("tr").find("td:eq(1)").html('<input name="edit_age" value="'+age+'">');
+	$(this).parents("tr").find("td:eq(2)").html('<input name="edit_dob" value="'+dob+'">');
+        $(this).parents("tr").find("td:eq(3)").html('<input name="edit_interests" value="'+interests+'">');
+	$(this).parents("tr").find("td:eq(4)").html('<input name="edit_place" value="'+place+'">');
+    
+    
+        $(this).parents("tr").find("td:eq(5)").prepend("<button class='btn btn-info btn-xs btn-update'>Update</button>&nbsp<button class='btn btn-warning btn-xs btn-cancel'>Cancel</button>")
+        $(this).hide();
+    });
+   
+    $("body").on("click", ".btn-cancel", function(){
+        var name = $(this).parents("tr").attr('data-name');
+        var age = $(this).parents("tr").attr('data-age');
+    	var dob = $(this).parents("tr").attr('data-dob');
+    	var interests = $(this).parents("tr").attr('data-interests');
+	var place = $(this).parents("tr").attr('data-place');
+    
+        $(this).parents("tr").find("td:eq(0)").text(name);
+        $(this).parents("tr").find("td:eq(1)").text(age);
+   	$(this).parents("tr").find("td:eq(2)").text(dob);
+   	$(this).parents("tr").find("td:eq(3)").text(interests);
+	$(this).parents("tr").find("td:eq(4)").text(place);
+   
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-update").remove();
+        $(this).parents("tr").find(".btn-cancel").remove();
+    });
+   
+    $("body").on("click", ".btn-update", function(){
+        var name = $(this).parents("tr").find("input[name='edit_name']").val();
+        var age = $(this).parents("tr").find("input[name='edit_age']").val();
+    	var dob = $(this).parents("tr").find("input[name='edit_dob']").val();
+    	var interests = $(this).parents("tr").find("input[name='edit_interests']").val();
+	var place = $(this).parents("tr").find("input[name='edit_place']").val();
+    
+        $(this).parents("tr").find("td:eq(0)").text(name);
+        $(this).parents("tr").find("td:eq(1)").text(age);
+     	$(this).parents("tr").find("td:eq(2)").text(dob);
+     	$(this).parents("tr").find("td:eq(3)").text(interests);
+	$(this).parents("tr").find("td:eq(4)").text(place);
+     
+        $(this).parents("tr").attr('data-name', name);
+        $(this).parents("tr").attr('data-age', age);
+    	$(this).parents("tr").attr('data-dob', dob);
+    	$(this).parents("tr").attr('data-interests', interests);
+	$(this).parents("tr").attr('data-place', place);
+    
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-cancel").remove();
+        $(this).parents("tr").find(".btn-update").remove();
+    });
+    function myFunction() {
+  	var input, filter, table, tr, td, i, txtValue;
+  	input = document.getElementById("myInput");
+ 	filter = input.value.toUpperCase();
+  	table = document.getElementById("myTable");
+  	tr = table.getElementsByTagName("tr");
+  	for (i = 0; i < tr.length; i++) {
+    	td = tr[i].getElementsByTagName("td")[0];
+    	if (td) {
+      		txtValue = td.textContent || td.innerText;
+      		if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        		tr[i].style.display = "";
+      		} else {
+        		tr[i].style.display = "none";
+      		}
+    	}       
+  }
+}
+</script>
+     
+</body>
+</html>
