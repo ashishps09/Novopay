@@ -50,7 +50,7 @@ tr:hover {
     <div class="navbar-header">
       <a class="navbar-brand" href="#" style="align-left:50px;">Novopay</a>
     </div>
-   <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+   <input type="text" id="myInput" onkeyup="search()" placeholder="Search for names.." title="Type in a name">
   </div>
 </nav>    
 <div class="container">
@@ -183,7 +183,7 @@ tr:hover {
         $(this).parents("tr").find(".btn-cancel").remove();
         $(this).parents("tr").find(".btn-update").remove();
     });
-    function myFunction() {
+    function search() {
   	var input, filter, table, tr, td, i, txtValue;
   	input = document.getElementById("myInput");
  	filter = input.value.toUpperCase();
