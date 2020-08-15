@@ -81,7 +81,7 @@ tr:hover {
       <label>Place:</label>
       <input type="text" name="place" id="place" class="form-control" value="Delhi" required="">
     </div>
-    <button type="submit" class="btn btn-success save-btn" onsubmit="submit">Add User</button>
+    <button type="submit" class="btn btn-success save-btn" onClick="addUser()">Add User</button>
     
   </form>
   <br/>
@@ -103,15 +103,15 @@ tr:hover {
    
 <script type="text/javascript">
    
-    $("form").submit(function(e){
-        e.preventDefault();
+    function addUser(){
+        
 		var name = document.getElementById('name').value;
 		var age = document.getElementById('age').value;
 		var dob = document.getElementById('dob').value;
 		var interests = document.getElementById('interests').value;
 		var place = document.getElementById('place').value;
           
-       	        document.getElementById('myTable').innerHTML += "<tr data-name='"+name+"' data-age='"+age+"' data-dob='"+dob+"' data-interests='"+interests+"' data-place='"+place+"'><td>"+name+"</td><td>"+age+"</td><td>"+dob+"</td><td>"+interests+"</td><td>"+place+"</td><td><button class='btn btn-info btn-xs btn-edit'>Edit</button>&nbsp<button class='btn btn-danger btn-xs btn-delete'  onClick='remove(this.parentNode)'>Delete</button></td></tr>" ;
+       	document.getElementById('myTable').innerHTML += "<tr data-name='"+name+"' data-age='"+age+"' data-dob='"+dob+"' data-interests='"+interests+"' data-place='"+place+"'><td>"+name+"</td><td>"+age+"</td><td>"+dob+"</td><td>"+interests+"</td><td>"+place+"</td><td><button class='btn btn-info btn-xs btn-edit'>Edit</button>&nbsp<button class='btn btn-danger btn-xs btn-delete'  onClick='remove(this.parentNode)'>Delete</button></td></tr>" ;
 		
 		document.getElementById('name').value = '';
 		document.getElementById('age').value = '';
@@ -119,7 +119,7 @@ tr:hover {
 		document.getElementById('interests').value = '';
 		document.getElementById('place').value = '';
         
-    });
+    };
    
     function remove(element) {
 		element.parentNode.remove(element);
