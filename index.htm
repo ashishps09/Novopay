@@ -59,27 +59,27 @@ tr:hover {
         
     <div class="form-group">
       <label>Name:</label>
-      <input type="text" name="name" class="form-control" value="Aashish" required="">
+      <input type="text" name="name" id="name" class="form-control" value="Aashish" required="">
     </div>
     
     <div class="form-group">
       <label>Age:</label>
-      <input type="text" name="age" class="form-control" value="22" required="">
+      <input type="text" name="age" id="age" class="form-control" value="22" required="">
     </div>
    
     <div class="form-group">
       <label>DOB:</label>
-      <input type="date" name="dob" class="form-control" value="1998/07/28" required="">
+      <input type="date" name="dob" id="dob" class="form-control" value="1998/07/28" required="">
     </div>
     
     <div class="form-group">
       <label>Interests:</label>
-      <input type="text" name="interests" class="form-control" value="Reading" required="">
+      <input type="text" name="interests" id="interests" class="form-control" value="Reading" required="">
     </div>
 
     <div class="form-group">
       <label>Place:</label>
-      <input type="text" name="place" class="form-control" value="Delhi" required="">
+      <input type="text" name="place" id="place" class="form-control" value="Delhi" required="">
     </div>
     <button type="submit" class="btn btn-success save-btn">Add User</button>
     
@@ -105,19 +105,20 @@ tr:hover {
    
     $("form").submit(function(e){
         e.preventDefault();
-        var name = $("input[name='name']").val();
-        var age = $("input[name='age']").val();
-	var dob = $("input[name='dob']").val();
-	var interests = $("input[name='interests']").val();
-	var place = $("input[name='place']").val();
+		var name = document.getElementById('name').value;
+		var age = document.getElementById('age').value;
+		var dob = document.getElementById('dob').value;
+		var interests = document.getElementById('interests').value;
+		var place = document.getElementById('place').value;
           
-        $(".data-table tbody").append("<tr data-name='"+name+"' data-age='"+age+"' data-dob='"+dob+"' data-interests='"+interests+"' data-place='"+place+"'><td>"+name+"</td><td>"+age+"</td><td>"+dob+"</td><td>"+interests+"</td><td>"+place+"</td><td><button class='btn btn-info btn-xs btn-edit'>Edit</button>&nbsp<button class='btn btn-danger btn-xs btn-delete'>Delete</button></td></tr>");
-    
-        $("input[name='name']").val('');
-        $("input[name='age']").val('');
-	$("input[name='dob']").val('');
-	$("input[name='interests']").val('');
-	$("input[name='place']").val('');
+        document.getElementById('myTable').innerHTML += "<tr data-name='"+name+"' data-age='"+age+"' data-dob='"+dob+"' data-interests='"+interests+"' data-place='"+place+"'><td>"+name+"</td><td>"+age+"</td><td>"+dob+"</td><td>"+interests+"</td><td>"+place+"</td><td><button class='btn btn-info btn-xs btn-edit'>Edit</button>&nbsp<button class='btn btn-danger btn-xs btn-delete'>Delete</button></td></tr>" ;
+		
+		document.getElementById('name').value = '';
+		document.getElementById('age').value = '';
+		document.getElementById('dob').value = '';
+		document.getElementById('interests').value = '';
+		document.getElementById('place').value = '';
+        
     });
    
     $("body").on("click", ".btn-delete", function(){
