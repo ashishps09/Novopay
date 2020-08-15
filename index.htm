@@ -81,7 +81,7 @@ tr:hover {
       <label>Place:</label>
       <input type="text" name="place" id="place" class="form-control" value="Delhi" required="">
     </div>
-    <button type="submit" class="btn btn-success save-btn">Add User</button>
+    <button type="submit" class="btn btn-success save-btn" onsubmit="submit">Add User</button>
     
   </form>
   <br/>
@@ -111,7 +111,7 @@ tr:hover {
 		var interests = document.getElementById('interests').value;
 		var place = document.getElementById('place').value;
           
-        document.getElementById('myTable').innerHTML += "<tr data-name='"+name+"' data-age='"+age+"' data-dob='"+dob+"' data-interests='"+interests+"' data-place='"+place+"'><td>"+name+"</td><td>"+age+"</td><td>"+dob+"</td><td>"+interests+"</td><td>"+place+"</td><td><button class='btn btn-info btn-xs btn-edit'>Edit</button>&nbsp<button class='btn btn-danger btn-xs btn-delete'>Delete</button></td></tr>" ;
+       	        document.getElementById('myTable').innerHTML += "<tr data-name='"+name+"' data-age='"+age+"' data-dob='"+dob+"' data-interests='"+interests+"' data-place='"+place+"'><td>"+name+"</td><td>"+age+"</td><td>"+dob+"</td><td>"+interests+"</td><td>"+place+"</td><td><button class='btn btn-info btn-xs btn-edit'>Edit</button>&nbsp<button class='btn btn-danger btn-xs btn-delete'  onClick='remove(this.parentNode)'>Delete</button></td></tr>" ;
 		
 		document.getElementById('name').value = '';
 		document.getElementById('age').value = '';
@@ -121,10 +121,9 @@ tr:hover {
         
     });
    
-    $("body").on("click", ".btn-delete", function(){
-        $(this).parents("tr").remove();
-    });
-    
+    function remove(element) {
+		element.parentNode.remove(element);
+	}
     $("body").on("click", ".btn-edit", function(){
         var name = $(this).parents("tr").attr('data-name');
         var age = $(this).parents("tr").attr('data-age');
