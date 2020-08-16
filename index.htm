@@ -26,7 +26,6 @@ th, td {
   
 }
 td {
-	
 	color:black;
 	}
 tr:nth-child(even) {background-color: dark-grey;}
@@ -154,9 +153,9 @@ input{
 		}
 		var tableContent = { "Name" : name , "Age" : age ,"DOB" : dob ,"Interests" : interests ,"Place" : place};
 		arr.push(tableContent);
-        	localStorage.setItem('tableContent', JSON.stringify(arr));
+        localStorage.setItem('tableContent', JSON.stringify(arr));
 		
-       		document.getElementById('myTable').innerHTML += "<tr data-name='"+name+"' data-age='"+age+"' data-dob='"+dob+"' data-interests='"+interests+"' data-place='"+place+"'><td>"+name+"</td><td>"+age+"</td><td>"+dob+"</td><td>"+interests+"</td><td>"+place+"</td><td><button class='btn btn-info btn-xs btn-edit' onClick='edit(this.parentNode)'>Edit</button>&nbsp<button class='btn btn-danger btn-xs btn-delete'  onClick='remove(this.parentNode)'>Delete</button></td></tr>" ;
+       	document.getElementById('myTable').innerHTML += "<tr data-name='"+name+"' data-age='"+age+"' data-dob='"+dob+"' data-interests='"+interests+"' data-place='"+place+"'><td>"+name+"</td><td>"+age+"</td><td>"+dob+"</td><td>"+interests+"</td><td>"+place+"</td><td><button class='btn btn-info btn-xs btn-edit' onClick='edit(this.parentNode)'>Edit</button>&nbsp<button class='btn btn-danger btn-xs btn-delete'  onClick='remove(this.parentNode)'>Delete</button></td></tr>" ;
 		
 		document.getElementById('name').value = '';
 		document.getElementById('age').value = '';
