@@ -111,7 +111,7 @@ tr:hover {
 		var interests = document.getElementById('interests').value;
 		var place = document.getElementById('place').value;
           
-       	document.getElementById('myTable').innerHTML += "<tr data-name='"+name+"' data-age='"+age+"' data-dob='"+dob+"' data-interests='"+interests+"' data-place='"+place+"'><td>"+name+"</td><td>"+age+"</td><td>"+dob+"</td><td>"+interests+"</td><td>"+place+"</td><td><button class='btn btn-info btn-xs btn-edit'>Edit</button>&nbsp<button class='btn btn-danger btn-xs btn-delete'  onClick='remove(this.parentNode)'>Delete</button></td></tr>" ;
+       	document.getElementById('myTable').innerHTML += "<tr data-name='"+name+"' data-age='"+age+"' data-dob='"+dob+"' data-interests='"+interests+"' data-place='"+place+"'><td>"+name+"</td><td>"+age+"</td><td>"+dob+"</td><td>"+interests+"</td><td>"+place+"</td><td><button class='btn btn-info btn-xs btn-edit' onClick='edit(this.parentNode)'>Edit</button>&nbsp<button class='btn btn-danger btn-xs btn-delete'  onClick='remove(this.parentNode)'>Delete</button></td></tr>" ;
 		
 		document.getElementById('name').value = '';
 		document.getElementById('age').value = '';
@@ -143,20 +143,21 @@ tr:hover {
     		}       
  	 }
 	}
+	function edit(el){
+		var name = el.parentNode.getAttribute('data-name');
+		var age = el.parentNode.getAttribute('data-age');
+		var dob = el.parentNode.getAttribute('data-dob');
+		var interests = el.parentNode.getAttribute('data-interests');
+		var place = el.parentNode.getAttribute('data-place');
+		
+		el.parentNode.querySelectorAll("td")[0].innerHTML = '<input name="edit_name" value="'+name+'">';
+		el.parentNode.querySelectorAll("td")[1].innerHTML = '<input name="edit_age" value="'+age+'">';
+		el.parentNode.querySelectorAll("td")[2].innerHTML = '<input name="edit_dob" value="'+dob+'">';
+		el.parentNode.querySelectorAll("td")[3].innerHTML = '<input name="edit_interests" value="'+interests+'">';
+		el.parentNode.querySelectorAll("td")[4].innerHTML = '<input name="edit_place" value="'+place+'">';
+		
+	}
     $("body").on("click", ".btn-edit", function(){
-        var name = $(this).parents("tr").attr('data-name');
-        var age = $(this).parents("tr").attr('data-age');
-	var dob = $(this).parents("tr").attr('data-dob');
-	var interests = $(this).parents("tr").attr('data-interests');
-	var place = $(this).parents("tr").attr('data-place');
-    
-        $(this).parents("tr").find("td:eq(0)").html('<input name="edit_name" value="'+name+'">');
-        $(this).parents("tr").find("td:eq(1)").html('<input name="edit_age" value="'+age+'">');
-	$(this).parents("tr").find("td:eq(2)").html('<input name="edit_dob" value="'+dob+'">');
-        $(this).parents("tr").find("td:eq(3)").html('<input name="edit_interests" value="'+interests+'">');
-	$(this).parents("tr").find("td:eq(4)").html('<input name="edit_place" value="'+place+'">');
-    
-    
         $(this).parents("tr").find("td:eq(5)").prepend("<button class='btn btn-info btn-xs btn-update'>Update</button>&nbsp<button class='btn btn-warning btn-xs btn-cancel'>Cancel</button>")
         $(this).hide();
     });
