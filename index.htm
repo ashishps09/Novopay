@@ -150,54 +150,62 @@ tr:hover {
 		var interests = el.parentNode.getAttribute('data-interests');
 		var place = el.parentNode.getAttribute('data-place');
 		
-		el.parentNode.querySelectorAll("td")[0].innerHTML = '<input name="edit_name" value="'+name+'">';
-		el.parentNode.querySelectorAll("td")[1].innerHTML = '<input name="edit_age" value="'+age+'">';
-		el.parentNode.querySelectorAll("td")[2].innerHTML = '<input name="edit_dob" value="'+dob+'">';
-		el.parentNode.querySelectorAll("td")[3].innerHTML = '<input name="edit_interests" value="'+interests+'">';
-		el.parentNode.querySelectorAll("td")[4].innerHTML = '<input name="edit_place" value="'+place+'">';
+		el.parentNode.querySelectorAll("td")[0].innerHTML = '<input data-name="'+name+'" value="'+name+'">';
+		el.parentNode.querySelectorAll("td")[1].innerHTML = '<input data-age="'+age+'" value="'+age+'">';
+		el.parentNode.querySelectorAll("td")[2].innerHTML = '<input data-dob="'+dob+'" value="'+dob+'">';
+		el.parentNode.querySelectorAll("td")[3].innerHTML = '<input data-interests="'+interests+'" value="'+interests+'">';
+		el.parentNode.querySelectorAll("td")[4].innerHTML = '<input data-place="'+place+'" value="'+place+'">';
 		
 	}
     $("body").on("click", ".btn-edit", function(){
-        $(this).parents("tr").find("td:eq(5)").prepend("<button class='btn btn-info btn-xs btn-update'>Update</button>&nbsp<button class='btn btn-warning btn-xs btn-cancel'>Cancel</button>")
+        $(this).parents("tr").find("td:eq(5)").prepend("<button class='btn btn-info btn-xs btn-update' onClick='update(this.parentNode)'>Update</button>&nbsp<button class='btn btn-warning btn-xs btn-cancel' onClick='cancel(this.parentNode)'>Cancel</button>")
         $(this).hide();
     });
-   
-    $("body").on("click", ".btn-cancel", function(){
-        var name = $(this).parents("tr").attr('data-name');
-        var age = $(this).parents("tr").attr('data-age');
-    	var dob = $(this).parents("tr").attr('data-dob');
-    	var interests = $(this).parents("tr").attr('data-interests');
-	var place = $(this).parents("tr").attr('data-place');
     
-        $(this).parents("tr").find("td:eq(0)").text(name);
-        $(this).parents("tr").find("td:eq(1)").text(age);
-   	$(this).parents("tr").find("td:eq(2)").text(dob);
-   	$(this).parents("tr").find("td:eq(3)").text(interests);
-	$(this).parents("tr").find("td:eq(4)").text(place);
-   
+	function cancel(el){
+		var name = el.parentNode.getAttribute('data-name');
+		var age = el.parentNode.getAttribute('data-age');
+		var dob = el.parentNode.getAttribute('data-dob');
+		var interests = el.parentNode.getAttribute('data-interests');
+		var place = el.parentNode.getAttribute('data-place');
+		
+		el.parentNode.querySelectorAll("td")[0].innerText = name;
+		el.parentNode.querySelectorAll("td")[1].innerText = age;
+		el.parentNode.querySelectorAll("td")[2].innerText = dob;
+		el.parentNode.querySelectorAll("td")[3].innerText = interests;
+		el.parentNode.querySelectorAll("td")[4].innerText = place;
+		
+	}
+	
+    $("body").on("click", ".btn-cancel", function(){
+	
         $(this).parents("tr").find(".btn-edit").show();
         $(this).parents("tr").find(".btn-update").remove();
         $(this).parents("tr").find(".btn-cancel").remove();
     });
-   
+	
+	function update(el){
+	
+		var name = el.parentNode.querySelectorAll("td")[0].querySelector('input').value;
+		var age = el.parentNode.querySelectorAll("td")[1].querySelector('input').value;
+		var dob = el.parentNode.querySelectorAll("td")[2].querySelector('input').value;
+		var interests = el.parentNode.querySelectorAll("td")[3].querySelector('input').value;
+		var place = el.parentNode.querySelectorAll("td")[4].querySelector('input').value;
+	
+		el.parentNode.querySelectorAll("td")[0].innerText = name;
+		el.parentNode.querySelectorAll("td")[1].innerText = age;
+		el.parentNode.querySelectorAll("td")[2].innerText = dob;
+		el.parentNode.querySelectorAll("td")[3].innerText = interests;
+		el.parentNode.querySelectorAll("td")[4].innerText = place;
+		
+		el.parentNode.setAttribute('data-name', name);
+		el.parentNode.setAttribute('data-age', age);
+		el.parentNode.setAttribute('data-dob', dob);
+		el.parentNode.setAttribute('data-interests', interests);
+		el.parentNode.setAttribute('data-place', place);
+	}
+	
     $("body").on("click", ".btn-update", function(){
-        var name = $(this).parents("tr").find("input[name='edit_name']").val();
-        var age = $(this).parents("tr").find("input[name='edit_age']").val();
-    	var dob = $(this).parents("tr").find("input[name='edit_dob']").val();
-    	var interests = $(this).parents("tr").find("input[name='edit_interests']").val();
-	var place = $(this).parents("tr").find("input[name='edit_place']").val();
-    
-        $(this).parents("tr").find("td:eq(0)").text(name);
-        $(this).parents("tr").find("td:eq(1)").text(age);
-     	$(this).parents("tr").find("td:eq(2)").text(dob);
-     	$(this).parents("tr").find("td:eq(3)").text(interests);
-	$(this).parents("tr").find("td:eq(4)").text(place);
-     
-        $(this).parents("tr").attr('data-name', name);
-        $(this).parents("tr").attr('data-age', age);
-    	$(this).parents("tr").attr('data-dob', dob);
-    	$(this).parents("tr").attr('data-interests', interests);
-	$(this).parents("tr").attr('data-place', place);
     
         $(this).parents("tr").find(".btn-edit").show();
         $(this).parents("tr").find(".btn-cancel").remove();
